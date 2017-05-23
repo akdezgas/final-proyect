@@ -5,7 +5,7 @@ const Schema          = mongoose.Schema;
 const TYPES_Location  = require('../plate-location');
 
 const PlateSchema = new Schema({
-  _creator      : { type: Schema.Types.ObjectId, ref: 'User' },
+  creator      : { type: Schema.Types.ObjectId, ref: 'User' },
   name          : { type: String },
   description   : { type: String },
   origin        : { type: String },

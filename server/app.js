@@ -5,6 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+const session         = require("express-session");
+const passport        = require("passport");
+
+const authController  = require("./api/user/auth-routes");
+require('./config/passport')(passport);
 const cors = require('cors');
 // Lesson 1: Require mongoose
 const mongoose = require('mongoose');
@@ -19,6 +24,18 @@ mongoose.connect(urlDB).then(() => {
 
 var app = express();
 
+
+var whitelist = [
+    'http://localhost:4200',
+];
+var corsOptions = {
+    origin: function(origin, callback){
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    },
+    credentials: true
+};
+app.use(cors(corsOptions));
 // view engine setup
 
 app.set('view engine', 'ejs');
@@ -31,7 +48,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: "passport-local-strategy",
+  resave: true,
+  saveUninitialized: true,
+  cookie : { httpOnly: true, maxAge: 2419200000 }
+}));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./routes')(app);
 

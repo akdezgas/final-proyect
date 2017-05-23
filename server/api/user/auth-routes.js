@@ -2,20 +2,28 @@ const express    = require('express');
 const passport   = require('passport');
 const bcrypt     = require('bcrypt');
 // Our user model
-const User       = require('./user.model');
+const User      = require('./user.model');
 const authRoutes = express.Router();
+const bcryptSalt     = 10;
 
-authRoutes.post('/signup', (req, res, next) => {
+
+exports.listUser= function(req, res, next){
+  User.find()
+  .then( userList => {res.json(userList);})
+  .reject(err => { res.status(500).json(err)});
+};
+
+exports.signUp = function(req, res, next) {
   const name     = req.body.name;
   const email    = req.body.email;
   const password = req.body.password;
 
-  if (!username || !password || !email) {
+  if (!name || !password || !email) {
     res.status(400).json({ message: 'Provide all the information' });
     return;
   }
 
-  User.findOne({ username }, '_id', (err, foundUser) => {
+  User.findOne({ name }, '_id', (err, foundUser) => {
     if (foundUser) {
       res.status(400).json({ message: 'The username already exists' });
       return;
@@ -25,10 +33,11 @@ authRoutes.post('/signup', (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
 
     const theUser = new User({
-      username,
+      name,
       email,
       password: hashPass
     });
+
 
     theUser.save((err) => {
       if (err) {
@@ -47,52 +56,67 @@ authRoutes.post('/signup', (req, res, next) => {
 
     });
   });
-});
+};
 
-authRoutes.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, theUser, failureDetails) => {
-    if (err) {
-      res.status(500).json({ message: 'Something went wrong' });
-      return;
-    }
+exports.logIn = function(req, res, next){
+  passport.authenticate('local', function(err, user, info) {
+    console.log(user)
+    if (err) { return next(err); }
 
-    if (!theUser) {
-      res.status(401).json(failureDetails);
-      return;
-    }
+    if (!user) { return res.status(401).json(info); }
 
-    req.login(theUser, (err) => {
+    req.login(user, function(err) {
       if (err) {
-        res.status(500).json({ message: 'Something went wrong' });
-        return;
+        return res.status(500).json({
+          message: 'something went wrong :('
+        });
       }
-
-      // We are now logged in (notice req.user)
       res.status(200).json(req.user);
     });
   })(req, res, next);
-});
+};
 
-authRoutes.post('/logout', (req, res, next) => {
+exports.editUser = function(req, res ,next) {
+  const updates = {
+    name:          req.body.name,
+    email:         req.body.email,
+    password:      req.body.password,
+    image:         req.body.image
+  };
+  User.findByIdAndUpdate(req.params.id, updates, (err) => {
+    if (err) {
+      return res.status(400).json({ message: "Unable to update User", error});
+    }
+    res.json({ message: 'User updated successfully'});
+  });
+};
+
+exports.logOut = function(req, res ,next) {
   req.logout();
   res.status(200).json({ message: 'Success' });
-});
+};
 
-authRoutes.get('/loggedin', (req, res, next) => {
+exports.logStill = function(req, res ,next) {
   if (req.isAuthenticated()) {
     res.status(200).json(req.user);
     return;
   }
 
   res.status(403).json({ message: 'Unauthorized' });
-});
+};
 
 
-authRoutes.get('/private', (req, res, next) => {
+exports.private = function(req, res ,next) {
   if (req.isAuthenticated()) {
     res.json({ message: 'This is a private message' });
     return;
   }
 
   res.status(403).json({ message: 'Unauthorized' });
-});
+};
+
+exports.removeUser = function (req, res) {
+    User.findByIdAndRemove(req.params.id)
+      .then((list) => res.status(202).json({ message: 'user removed successfully' }))
+      .catch(err => res.status(500).json({ message: 'impossible to remove the user', error: err }));
+};
