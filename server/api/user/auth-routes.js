@@ -14,16 +14,16 @@ exports.listUser= function(req, res, next){
 };
 
 exports.signUp = function(req, res, next) {
-  const name     = req.body.name;
+  const username     = req.body.username;
   const email    = req.body.email;
   const password = req.body.password;
 
-  if (!name || !password || !email) {
+  if (!username || !password || !email) {
     res.status(400).json({ message: 'Provide all the information' });
     return;
   }
 
-  User.findOne({ name }, '_id', (err, foundUser) => {
+  User.findOne({ username }, '_id', (err, foundUser) => {
     if (foundUser) {
       res.status(400).json({ message: 'The username already exists' });
       return;
@@ -33,7 +33,7 @@ exports.signUp = function(req, res, next) {
     const hashPass = bcrypt.hashSync(password, salt);
 
     const theUser = new User({
-      name,
+      username,
       email,
       password: hashPass
     });
@@ -60,7 +60,7 @@ exports.signUp = function(req, res, next) {
 
 exports.logIn = function(req, res, next){
   passport.authenticate('local', function(err, user, info) {
-    console.log(user)
+    console.log(user);
     if (err) { return next(err); }
 
     if (!user) { return res.status(401).json(info); }
@@ -78,7 +78,7 @@ exports.logIn = function(req, res, next){
 
 exports.editUser = function(req, res ,next) {
   const updates = {
-    name:          req.body.name,
+    username:      req.body.username,
     email:         req.body.email,
     password:      req.body.password,
     image:         req.body.image
