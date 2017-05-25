@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../session.service';
-import $ from 'jquery';
+import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.css']
 })
-export class HomeComponent implements OnInit {
+export class LogoutComponent implements OnInit {
   user:any;
   error: any;
-  constructor( private session: SessionService) { }
+  constructor(private session: SessionService, private router : Router) { }
 
   ngOnInit() {
-    $('.parallax').parallax();
+
+
   }
   errorCb(err) {
     this.error = err;
@@ -23,5 +25,4 @@ export class HomeComponent implements OnInit {
     this.user = user;
     this.error = null;
   }
-
 }

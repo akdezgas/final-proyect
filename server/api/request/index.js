@@ -6,8 +6,9 @@ var controller = require('./request.controller');
 var router = express.Router();
 
 router.get('/', controller.listRequests);
+router.get('/:id', controller.singleRequest)
 router.post('/new', controller.createRequest);
 router.put('/:id/edit', controller.editRequest);
-router.delete('/:id', controller.removeRequest);
+router.delete('/:id/edit', controller.removeRequest);
 
 module.exports = router;

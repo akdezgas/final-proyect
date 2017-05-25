@@ -14,7 +14,7 @@ const PlateSchema = new Schema({
   deadline      : { type: Date },
   guests        : { type: Number, default: 0 },
   pic_path      : String,
-  pic_name      : String,
+  pic_name      : String
 });
 
 

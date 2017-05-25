@@ -14,9 +14,9 @@ exports.listUser= function(req, res, next){
 };
 
 exports.signUp = function(req, res, next) {
-  const username     = req.body.username;
-  const email    = req.body.email;
-  const password = req.body.password;
+  let username     = req.body.username;
+  let email    = req.body.email;
+  let password = req.body.password;
 
   if (!username || !password || !email) {
     res.status(400).json({ message: 'Provide all the information' });
@@ -60,7 +60,6 @@ exports.signUp = function(req, res, next) {
 
 exports.logIn = function(req, res, next){
   passport.authenticate('local', function(err, user, info) {
-    console.log(user);
     if (err) { return next(err); }
 
     if (!user) { return res.status(401).json(info); }
@@ -83,9 +82,10 @@ exports.editUser = function(req, res ,next) {
     password:      req.body.password,
     image:         req.body.image
   };
+  console.log(updates)
   User.findByIdAndUpdate(req.params.id, updates, (err) => {
     if (err) {
-      return res.status(400).json({ message: "Unable to update User", error});
+      return res.status(400).json({ message: "Unable to update User", err});
     }
     res.json({ message: 'User updated successfully'});
   });

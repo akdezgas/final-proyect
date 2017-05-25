@@ -10,6 +10,11 @@ exports.listPlates = function(req,res, next){
   .reject(err => { res.status(500).json(err)});
 };
 
+exports.singlePlate = function(req,res,next){
+  plateModel.findById(req.params.id)
+  .then(singlePlate => {res.json(singlePlate);})
+  .reject(err => { res.status(500).json(err)});
+};
 // POST
 exports.createPlate = function(req, res, next) {
 
@@ -23,10 +28,9 @@ exports.createPlate = function(req, res, next) {
     image:         req.body.image,
     creator:       req.user._id
   });
-  console.log(newPlate)
 	newPlate.save()
-  .then( plate => {res.json({ message: 'New Plate created!', id: newPlate._id });})
-  .reject( err => {res.json(err); });
+      .then( plate => {res.json({ message: 'New Plate created!', id: newPlate._id });})
+      .reject( err => {res.json(err); });
 };
 
 exports.editPlate = function(req, res ,next) {

@@ -7,6 +7,10 @@ import { MaterializeModule } from 'angular2-materialize';
 import { routes } from './app.routing';
 import { RouterModule } from "@angular/router";
 import { SessionService } from "./session.service";
+import { RequestService } from './request.service';
+import { ReviewService } from './review.service';
+import { PlateService } from './plate.service';
+
 
 
 import { AppComponent } from './app.component';
@@ -23,6 +27,8 @@ import { RequestsComponent } from './requests/requests.component';
 import { NewRequestComponent } from './new-request/new-request.component';
 import { SingleRequestComponent } from './single-request/single-request.component';
 import { EditRequestComponent } from './edit-request/edit-request.component';
+import { LogoutComponent } from './logout/logout.component';
+import { SelectComponent } from './select/select.component';
 
 
 @NgModule({
@@ -40,7 +46,9 @@ import { EditRequestComponent } from './edit-request/edit-request.component';
     RequestsComponent,
     NewRequestComponent,
     SingleRequestComponent,
-    EditRequestComponent
+    EditRequestComponent,
+    LogoutComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,7 @@ import { EditRequestComponent } from './edit-request/edit-request.component';
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [SessionService],
+  providers: [SessionService, ReviewService, RequestService, PlateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

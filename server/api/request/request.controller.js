@@ -8,6 +8,11 @@ exports.listRequests = function(req,res, next){
   .reject(err => { res.status(500).json(err)});
 };
 
+exports.singleRequest = function (req,res,next){
+  requestModel.findById(req.params.id)
+  .then(singleRequest => {res.json(singleRequest);})
+  .reject(err => { res.status(500).json(err)});
+};
 // POST
 exports.createRequest = function(req, res, next) {
 
