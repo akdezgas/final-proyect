@@ -26,7 +26,7 @@ export const routes: Routes = [
         ]
     },
     { path: 'select', component: SelectComponent},
-    { path: 'plates', component: PlatesComponent,
+    { path: 'plates/:location', component: PlatesComponent,
         children:[
           { path: 'new', component: NewPlateComponent},
           { path: ':id', component: SinglePlateComponent},

@@ -5,7 +5,8 @@ var controller = require('./plate.controller');
 
 var router = express.Router();
 
-router.get('/', controller.listPlates);
+router.get('/', controller.getAllList);
+router.get('/:location', controller.listPlates);
 router.post('/new', controller.createPlate);
 router.get('/:id', controller.singlePlate)
 router.put('/:id/edit', controller.editPlate);

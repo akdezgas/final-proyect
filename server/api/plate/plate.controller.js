@@ -4,8 +4,14 @@ plateModel = require('./plate.model');
 
 
 //Get Plates
-exports.listPlates = function(req,res, next){
+exports.getAllList = function (req,res,next){
   plateModel.find()
+  .then( plateList => {res.json(plateList);})
+  .reject(err => { res.status(500).json(err)});
+};
+
+exports.listPlates = function(req,res, next){
+  plateModel.find({location: req.params.location})
   .then( plateList => {res.json(plateList);})
   .reject(err => { res.status(500).json(err)});
 };
@@ -17,7 +23,6 @@ exports.singlePlate = function(req,res,next){
 };
 // POST
 exports.createPlate = function(req, res, next) {
-
   const newPlate = new plateModel({
     name:          req.body.name,
     description:   req.body.description,
@@ -28,6 +33,8 @@ exports.createPlate = function(req, res, next) {
     image:         req.body.image,
     creator:       req.user._id
   });
+  console.log("aaaa")
+  console.log(req.body)
 	newPlate.save()
       .then( plate => {res.json({ message: 'New Plate created!', id: newPlate._id });})
       .reject( err => {res.json(err); });

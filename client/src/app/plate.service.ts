@@ -13,8 +13,8 @@ export class PlateService {
   constructor(private http: Http) {
   }
 
-  getPlateList(){
-    return this.http.get(`${this.BASE_URL}/`, this.options)
+  getPlateList(location){
+    return this.http.get(`${this.BASE_URL}/${location}`, this.options)
     .map(res => res.json());
   }
 
