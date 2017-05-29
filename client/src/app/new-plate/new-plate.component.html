@@ -1,3 +1,44 @@
-<p>
-  new-plate works!
-</p>
+
+   <div class="row">
+      <form class="col s12" enctype="multipart/form-data">
+         <div class="row">
+            <div class="input-field col s6">
+               <i class="material-icons prefix">account_circle</i>
+               <input  id="name" type="text" [(ngModel)]="formInfo.name" name="name" class="active validate" required>
+               <label for="name">Username</label>
+            </div>
+            <div class="input-field col s6">
+               <i class="material-icons prefix">room</i>
+               <input id="origin" type="text" name = "origin" [(ngModel)]="formInfo.origin" class="active validate" required>
+               <label for="origin">Origin</label>
+            </div>
+         </div>
+         <div class="row">
+            <div class="input-field col s12">
+               <i class="material-icons prefix">mode_edit</i>
+               <textarea id="description" name ="description" [(ngModel)]="formInfo.description" type="text" class="materialize-textarea"></textarea>
+               <label for="description">Descripcion</label>
+            </div>
+         </div>
+         <div class="row">
+            <div class="input-field col s6">
+               <input placeholder="Email" id="email" type="email" class="validate">
+               <label for="email">Email</label>
+            </div>
+            <div class="input-field col s6">
+                  <label for="timepicker">Time</label>
+                  <input id="timepicker" data-default="14:20:00" class="timepicker" type="time">
+            </div>
+         </div>
+         <div class="row">
+           <div class="input-field col s12">
+             <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
+           </div>
+         </div>
+         <div class="col s6 offset-m3">
+             <button (click)="upload()"> Post Event </button>
+         </div>
+
+
+      </form>
+   </div>

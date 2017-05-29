@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
       (user) => this.successCb(user),
       (err) => this.errorCb(err)
     );
-    this.router.navigate(['/select'])
+    this.router.navigate(['/user/login'])
   }
 
 errorCb(err) {

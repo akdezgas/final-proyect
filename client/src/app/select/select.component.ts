@@ -18,7 +18,7 @@ export class SelectComponent implements OnInit {
     $('input.autocomplete').autocomplete({
       data: {
         "A coruña": null,
-        "Madrid ": null,
+        "Madrid ": undefined,
         "Huelva": null,
         "Barcelona": 'http://placehold.it/250x250'
       },
@@ -27,7 +27,7 @@ export class SelectComponent implements OnInit {
    // Callback function when value is autcompleted.
 
    //Arrow function Bind difference to normal function
-              
+
         this.router.navigate(['/plates',location])
       },
       minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.

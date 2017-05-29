@@ -11,6 +11,7 @@ import { RequestService } from './request.service';
 import { ReviewService } from './review.service';
 import { PlateService } from './plate.service';
 
+import { FileSelectDirective } from "ng2-file-upload";
 
 
 import { AppComponent } from './app.component';
@@ -29,6 +30,8 @@ import { SingleRequestComponent } from './single-request/single-request.componen
 import { EditRequestComponent } from './edit-request/edit-request.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SelectComponent } from './select/select.component';
+import { PlatesLocationComponent } from './plates-location/plates-location.component';
+import { RequestsLocationComponent } from './requests-location/requests-location.component';
 
 
 @NgModule({
@@ -48,7 +51,11 @@ import { SelectComponent } from './select/select.component';
     SingleRequestComponent,
     EditRequestComponent,
     LogoutComponent,
-    SelectComponent
+    SelectComponent,
+    PlatesLocationComponent,
+    FileSelectDirective,
+    RequestsLocationComponent
+
   ],
   imports: [
     BrowserModule,
