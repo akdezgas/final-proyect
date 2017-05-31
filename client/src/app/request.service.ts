@@ -13,8 +13,8 @@ export class RequestService {
   constructor(private http: Http) {
   }
 
-  getRequestList(){
-    return this.http.get(`${this.BASE_URL}/`, this.options)
+  getRequestList(location){
+    return this.http.get(`${this.BASE_URL}/${location}`, this.options)
     .map(res => res.json());
   }
 

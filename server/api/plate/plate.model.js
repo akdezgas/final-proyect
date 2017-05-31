@@ -1,11 +1,9 @@
-
-
 const mongoose        = require('mongoose');
 const Schema          = mongoose.Schema;
 const TYPES_Location  = require('../plate-location');
 
 const PlateSchema = new Schema({
-  creator      : { type: Schema.Types.ObjectId, ref: 'User' },
+  creator       : { type: Schema.Types.ObjectId, ref: 'User' },
   name          : { type: String },
   description   : { type: String },
   origin        : { type: String },
@@ -13,8 +11,8 @@ const PlateSchema = new Schema({
   price         : { type: Number },
   deadline      : { type: Date },
   guests        : { type: Number, default: 0 },
-  pic_path      : String,
-  pic_name      : String
+  pic_path      : { type: String},
+  pic_name      : { type:String}
 });
 
 

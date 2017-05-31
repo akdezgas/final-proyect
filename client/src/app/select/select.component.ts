@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import $ from 'jquery';
 import { PlateService } from '../plate.service';
 import { Router } from '@angular/router';
+import { SebmGoogleMap, SebmGoogleMapMarker } from 'angular2-google-maps/core';
 
 @Component({
   selector: 'app-select',
@@ -11,16 +12,24 @@ import { Router } from '@angular/router';
 export class SelectComponent implements OnInit {
 
 
+
   constructor(private plates: PlateService, private router : Router) {
   }
 
   ngOnInit() {
     $('input.autocomplete').autocomplete({
       data: {
-        "A coruña": null,
-        "Madrid ": undefined,
+        "Coruña": null,
+        "Madrid ": null,
         "Huelva": null,
-        "Barcelona": 'http://placehold.it/250x250'
+        "Valencia": null,
+        "Toledo":null,
+        "Avila":null,
+        "Murcia":null,
+        "Barcelona": null,
+        "Guipuzcoa":null,
+        "IslasBaleares":null
+
       },
       limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
       onAutocomplete: (location) => {
@@ -28,9 +37,13 @@ export class SelectComponent implements OnInit {
 
    //Arrow function Bind difference to normal function
 
-        this.router.navigate(['/plates',location])
+        this.router.navigate(['/plates', location])
       },
       minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
     });
+  }
+  selectItem(title){
+    console.log(title);
+    this.router.navigate(['/plates', title])
   }
 }

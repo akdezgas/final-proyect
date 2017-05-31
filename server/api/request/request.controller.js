@@ -2,8 +2,14 @@ mongoose = require('mongoose');
 requestModel = require('./request.model');
 
 
-exports.listRequests = function(req,res, next){
+exports.getAllRequests = function(req,res, next){
   requestModel.find()
+  .then( requestList => {res.json(requestList);})
+  .reject(err => { res.status(500).json(err)});
+};
+
+exports.listRequests = function (req,res,next){
+  requestModel.find({location: req.params.location})
   .then( requestList => {res.json(requestList);})
   .reject(err => { res.status(500).json(err)});
 };

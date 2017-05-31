@@ -33,6 +33,8 @@ import { SelectComponent } from './select/select.component';
 import { PlatesLocationComponent } from './plates-location/plates-location.component';
 import { RequestsLocationComponent } from './requests-location/requests-location.component';
 
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import { SebmGoogleMap, SebmGoogleMapMarker } from 'angular2-google-maps/core';
 
 @NgModule({
   declarations: [
@@ -54,16 +56,20 @@ import { RequestsLocationComponent } from './requests-location/requests-location
     SelectComponent,
     PlatesLocationComponent,
     FileSelectDirective,
-    RequestsLocationComponent
-
+    RequestsLocationComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCfxSGOIenLgP6yg723v0j4ZdTLay_Vjz0'
+    })
   ],
   providers: [SessionService, ReviewService, RequestService, PlateService],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }

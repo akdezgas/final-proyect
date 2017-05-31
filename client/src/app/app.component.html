@@ -1,13 +1,13 @@
 <nav >
-  <div class="materialize nav-wrapper teal darken-4 text-lighten-4">
-    <a routerLink="/" class="brand-logo">Home-Chef</a>
+  <div class="materialize nav-wrapper brown darken-2 text-lighten-4">
+    <a routerLink="/" class="brand-logo"><img id ="logo"src="../assets/logo.png" alt=""></a>
     <ul *ngIf="!user" id="nav-mobile" class="right hide-on-med-and-down">
       <li><a [routerLink]="['/user/login']"><i class="material-icons left">perm_identity</i>Log-In</a></li>
       <li><a [routerLink]="['/user/signup']"><i class="material-icons left">input</i>Sign-Up</a></li>
     </ul>
     <ul *ngIf="user" id="nav-mobile" class="right hide-on-med-and-down">
       <li><a routerLink="/user/{{user._id}}/edit"><i class="material-icons left">edit</i>Edit</a></li>
-      <li><a (click)="logout()"><i class="material-icons left">exit_to_app</i>Sign-out</a></li>
+      <li><a (click)="logout()"><i class="material-icons left">exit_to_app</i>Logout</a></li>
     </ul>
   </div>
 </nav>

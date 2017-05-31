@@ -11,20 +11,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PlatesLocationComponent implements OnInit {
   plate:any;
-
   error: any;
+  
   constructor(private plates: PlateService,  private route : ActivatedRoute , private router: Router) { }
 
   ngOnInit() {
         this.route.params
           .subscribe((params) => {
             this.plates.getPlateList(params.location).subscribe( plates => this.successCb(plates));
-            console.log(params.location)
           })
   }
-  new (){
-this.router.navigate(['/plates/new'])
-  }
+
   errorCb(err) {
     this.error = err;
     this.plate = null;
@@ -34,7 +31,5 @@ this.router.navigate(['/plates/new'])
     this.plate= value;
     this.error = null;
   }
-  requestList(){
-    
-  }
+
 }

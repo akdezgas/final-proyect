@@ -24,15 +24,8 @@ mongoose.connect(urlDB).then(() => {
 
 var app = express();
 
-
-var whitelist = [
-    'http://localhost:4200',
-];
 var corsOptions = {
-    origin: function(origin, callback){
-        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-        callback(null, originIsWhitelisted);
-    },
+    origin: true,
     credentials: true
 };
 app.use(cors(corsOptions));
@@ -57,7 +50,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+//IMPORTANTE POR AQQUI COMIENZA LA COSA
 require('./routes')(app);
 
 //HACE FALTA PONER LOS USE DE TODAS LAS RUTAS????!!!!!!

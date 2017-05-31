@@ -24,16 +24,17 @@ export class PlateService {
   }
 
   getPlateDetails(id){
-    return this.http.get(`${this.BASE_URL}/${id}/edit`, this.options)
+    return this.http.get(`${this.BASE_URL}/single/${id}`, this.options)
      .map(res => res.json());
   }
+
   //Remove y Edit
   edit(id,plate) {
-    return this.http.put(`${this.BASE_URL}/${id}/edit`,plate, this.options)
+    return this.http.put(`${this.BASE_URL}/single/${id}/edit`,plate, this.options)
      .map((res) => res.json());
   }
   delete(id){
-    return this.http.delete(`${this.BASE_URL}/${id}/edit`,this.options)
+    return this.http.delete(`${this.BASE_URL}/single/${id}/edit`,this.options)
      .map((res) => res.json());
   }
 
