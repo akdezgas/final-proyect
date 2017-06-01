@@ -3,10 +3,12 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
+import { environment }  from '../environments/environment';
+const  BASE_URL:string= environment.baseurl;
 
 @Injectable()
 export class PlateService {
-  BASE_URL:string= "http://localhost:3000/api/plate";
+
 
   plates:any;
   options : {withCredentials:true };
@@ -14,32 +16,32 @@ export class PlateService {
   }
 
   getPlateList(location){
-    return this.http.get(`${this.BASE_URL}/${location}`, this.options)
+    return this.http.get(`${BASE_URL}/api/plate/${location}`, this.options)
     .map(res => res.json());
   }
 
   newPlate(plates) {
-    return this.http.post(`${this.BASE_URL}/new`, plates,this.options)
+    return this.http.post(`${BASE_URL}/api/plate/new`, plates,this.options)
       .map(res => res.json())
   }
 
   getPlateDetails(id){
-    return this.http.get(`${this.BASE_URL}/single/${id}`, this.options)
+    return this.http.get(`${BASE_URL}/api/plate/single/${id}`, this.options)
      .map(res => res.json());
   }
 
   addGuest(id,plate) {
-    return this.http.put(`${this.BASE_URL}/single/guest/${id}`,plate, this.options)
+    return this.http.put(`${BASE_URL}/api/plate/single/guest/${id}`,plate, this.options)
      .map((res) => res.json());
   }
 
   //Remove y Edit
   edit(id,plate) {
-    return this.http.put(`${this.BASE_URL}/single/${id}/edit`,plate, this.options)
+    return this.http.put(`${BASE_URL}/api/plate/single/${id}/edit`,plate, this.options)
      .map((res) => res.json());
   }
   delete(id){
-    return this.http.delete(`${this.BASE_URL}/single/${id}/edit`,this.options)
+    return this.http.delete(`${BASE_URL}/api/plate/single/${id}/edit`,this.options)
      .map((res) => res.json());
   }
 

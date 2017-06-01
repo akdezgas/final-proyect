@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -14,7 +15,7 @@ const cors = require('cors');
 // Lesson 1: Require mongoose
 const mongoose = require('mongoose');
 // Lesson 2: Require dotenv configuration
-require('dotenv').config();
+
 
 const urlDB = process.env.MONGO_URL;
 console.log(`conncting to db: ${urlDB}`);

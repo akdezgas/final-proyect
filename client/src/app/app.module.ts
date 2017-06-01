@@ -11,7 +11,7 @@ import { RequestService } from './request.service';
 import { ReviewService } from './review.service';
 import { PlateService } from './plate.service';
 
-import { FileSelectDirective } from "ng2-file-upload";
+import { FileUploadModule } from "ng2-file-upload";
 
 
 import { AppComponent } from './app.component';
@@ -58,13 +58,14 @@ import { InboxComponent } from './inbox/inbox.component';
     LogoutComponent,
     SelectComponent,
     PlatesLocationComponent,
-    FileSelectDirective,
+
     RequestsLocationComponent,
     NewMessageComponent,
     InboxComponent,
   ],
   imports: [
     BrowserModule,
+    FileUploadModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
