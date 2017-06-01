@@ -35,6 +35,9 @@ import { RequestsLocationComponent } from './requests-location/requests-location
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { SebmGoogleMap, SebmGoogleMapMarker } from 'angular2-google-maps/core';
+import { DatePickerModule } from 'ng2-datepicker';
+import { NewMessageComponent } from './new-message/new-message.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,8 @@ import { SebmGoogleMap, SebmGoogleMapMarker } from 'angular2-google-maps/core';
     PlatesLocationComponent,
     FileSelectDirective,
     RequestsLocationComponent,
+    NewMessageComponent,
+    InboxComponent,
   ],
   imports: [
     BrowserModule,

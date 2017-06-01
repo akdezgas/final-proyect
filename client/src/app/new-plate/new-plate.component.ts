@@ -4,6 +4,11 @@ import { SessionService } from '../session.service';
 import $ from 'jquery';
 import { FileUploader} from "ng2-file-upload";
 import { Router } from '@angular/router';
+import { MapsAPILoader } from 'angular2-google-maps/core';
+declare var google: any;
+import { ViewChild, ElementRef } from '@angular/core';
+import { SebmGoogleMap, SebmGoogleMapMarker } from 'angular2-google-maps/core';
+
 
 @Component({
   selector: 'app-new-plate',
@@ -12,10 +17,14 @@ import { Router } from '@angular/router';
 })
 
 export class NewPlateComponent implements OnInit {
+  addressLat:number =  52.507417;
+  addressLng:number = 6.085781;
+
   plate: any;
   feedback: any;
-  loggedUser:any;
+  user:any;
   formInfo = {
+
     name: '',
     origin: '',
     description: '',
@@ -29,39 +38,43 @@ export class NewPlateComponent implements OnInit {
 
 
   constructor( private plateSession: PlateService,
-                private userSession: SessionService,
-              private router: Router) { }
+               private userSession: SessionService,
+               private router: Router,
+               private _loader: MapsAPILoader
+            ) { }
 
   ngOnInit() {
-    this.userSession.isLogged().subscribe( user => this.successCb(user));
-    this.userSession.getLoginEmitter().subscribe(user => this.successCb(user));
-    console.log(this.loggedUser)
+    if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition((location) => {
+                this.setLatLng(location.coords.latitude, location.coords.longitude);
+            });
+    this.userSession.getLoginEmitter().subscribe(user => this.user=user);
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
   }
 
+     }
+
+     setLatLng(lat:number, lng:number) {
+       this.addressLat = lat;
+       this.addressLng = lng;
+   }
   newq() {
-    this.uploader.onBeforeUploadItem = (item) => {
-      item.withCredentials = true;
-    }
+    console.log(this.addressLat)
   this.uploader.onBuildItemForm = (item, form) => {
 
     form.append('name', this.formInfo.name);
     form.append('origin', this.formInfo.origin);
     form.append('description', this.formInfo.description);
-    form.append('location', this.formInfo.location);
     form.append('price', this.formInfo.price);
-
+    form.append('location', this.formInfo.location);
+    form.append('addressLng', this.addressLng);
+    form.append('addressLat', this.addressLat);
   };
   this.uploader.uploadAll();
   this.router.navigate(['/plates', this.formInfo.location])
 }
-  errorCb(err) {
-    this.error = err;
-    this.plate = null;
-  }
-
-  successCb(val) {
-    this.loggedUser = val;
-    this.error = null;
-  }
 
 }

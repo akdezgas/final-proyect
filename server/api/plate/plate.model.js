@@ -8,6 +8,8 @@ const PlateSchema = new Schema({
   description   : { type: String },
   origin        : { type: String },
   location      : { type: String, enum: TYPES_Location},
+  addressLat    : { type: Number},
+  addressLng    : { type: Number},
   price         : { type: Number },
   deadline      : { type: Date },
   guests        : { type: Number, default: 0 },

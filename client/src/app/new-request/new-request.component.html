@@ -24,16 +24,10 @@
             </div>
          </div>
          <div class="row">
-            <div class="input-field col s6">
-              <i class="material-icons prefix">local_atm</i>
-               <input  id="price" type="number" name="price" [(ngModel)]="formInfo.price" class="active validate">
-               <label for="price">Price per plate</label>
-            </div>
-            <div class="input-field col s6">
-              <i class="material-icons prefix">timer</i>
-                <label for="timepicker">Time</label>
-                <input id="timepicker" data-default="14:20:00" class="timepicker" type="time">
-            </div>
+           <div class="input-field col s6">
+             <input placeholder="Date" type="date" class="datepicker">
+
+           </div>
          </div>
          <div class="row">
             <div class="input-field col s6 offset-m3">
@@ -43,11 +37,6 @@
             </div>
          </div>
 
-         <div class="row">
-           <div class="input-field col s6 offset-m3">
-             <input type="file" name="filename" ng2FileSelect [uploader]="uploader" />
-           </div>
-         </div>
 
          <div class="col s12 center-align">
            <button (click) ="newq()"  class="btn waves-effect waves-light" type="submit" name="action">Submit

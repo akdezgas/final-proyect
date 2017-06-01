@@ -28,8 +28,7 @@ exports.createRequest = function(req, res, next) {
     description:   req.body.description,
     origin:        req.body.origin,
     location:      req.body.location,
-    deadline:      req.body.deadline,
-    image:         req.body.image
+    deadline:      req.body.deadline
   });
 
 	newRequest.save()

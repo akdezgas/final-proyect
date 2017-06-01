@@ -17,6 +17,9 @@ import { SingleRequestComponent} from './single-request/single-request.component
 import { EditRequestComponent} from './edit-request/edit-request.component';
 import { SelectComponent } from './select/select.component';
 import { RequestsLocationComponent} from './requests-location/requests-location.component'
+import { NewMessageComponent } from './new-message/new-message.component';
+import {InboxComponent} from './inbox/inbox.component';
+
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
@@ -44,5 +47,8 @@ export const routes: Routes = [
           {path: ':id/edit', component:EditRequestComponent}
         ]
       },
+      { path: 'message/:id', component: NewMessageComponent},
+      { path: 'inbox/:id', component: InboxComponent},
+
     { path: '**', redirectTo: '' }
 ];

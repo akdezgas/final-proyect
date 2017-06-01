@@ -1,4 +1,20 @@
 #image-prop{
   height: 320px;
-  width: 320px;
+  width: 400px;
+}
+
+
+#image-background{
+  background-image: url(../../assets/img1.jpg);
+
+}
+
+#back-plate{
+  background-color: white;
+  opacity: 0.93;
+
+}
+.sebm-google-map-container {
+  height: 500px;
+  width: 100%;
 }

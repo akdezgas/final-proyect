@@ -28,6 +28,8 @@ exports.createPlate = function(req, res, next) {
     name:          req.body.name,
     description:   req.body.description,
     origin:        req.body.origin,
+    addressLng:    req.body.addressLng,
+    addressLat:    req.body.addressLat, 
     location:      req.body.location,
     deadline:      req.body.deadline,
     price:         req.body.price,
@@ -59,6 +61,19 @@ exports.editPlate = function(req, res ,next) {
   });
 };
 
+exports.addGuest = function(req, res ,next) {
+
+  const updates = {
+    guests:          req.body.guests
+  };
+  console.log (updates)
+  plateModel.findByIdAndUpdate(req.params.id, updates, (err) => {
+    if (err) {
+      return res.status(400).json({ message: "Unable to update plate", err});
+    }
+    res.json({ message: 'Plate updated successfully'});
+  });
+};
 
 exports.removePlate = function (req, res) {
     plateModel.findByIdAndRemove(req.params.id)

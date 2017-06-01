@@ -5,3 +5,10 @@
   height: 500px;
   width: 100%;
 }
+
+#image-background{
+  background-image: url(../../assets/img3.jpg);
+  opacity: 0.9;
+  height:800px;
+  width: 100%;
+}

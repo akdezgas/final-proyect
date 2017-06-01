@@ -1,6 +1,7 @@
 import { Component ,OnInit} from '@angular/core';
 import { SessionService } from './session.service';
 import { Router } from '@angular/router';
+import $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,10 @@ export class AppComponent implements OnInit {
   constructor( private session: SessionService,private router : Router) { }
 
   ngOnInit() {
+
     this.session.isLogged().subscribe( user => this.successCb(user));
     this.session.getLoginEmitter().subscribe(user => this.successCb(user));
+      $(".button-collapse").sideNav();
   }
 
   logout(){

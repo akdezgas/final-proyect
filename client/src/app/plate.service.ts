@@ -28,6 +28,11 @@ export class PlateService {
      .map(res => res.json());
   }
 
+  addGuest(id,plate) {
+    return this.http.put(`${this.BASE_URL}/single/guest/${id}`,plate, this.options)
+     .map((res) => res.json());
+  }
+
   //Remove y Edit
   edit(id,plate) {
     return this.http.put(`${this.BASE_URL}/single/${id}/edit`,plate, this.options)
@@ -37,5 +42,6 @@ export class PlateService {
     return this.http.delete(`${this.BASE_URL}/single/${id}/edit`,this.options)
      .map((res) => res.json());
   }
+
 
 }

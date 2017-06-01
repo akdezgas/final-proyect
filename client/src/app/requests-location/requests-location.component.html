@@ -1,33 +1,37 @@
-<div class="row center-align">
-  <p>Lista de Requests</p>
-</div>
+<div class="image-background">
+  <div class="row center-align">
+    <br>
+    <h1 *ngIf="request" > Request List in {{request[0].location}}</h1>
+  </div>
 
-<div class="row center-align">
-  <a routerLink="/requests/new" class="waves-effect waves-light btn">Upload a Request</a>
-</div>
+  <div class="row center-align">
+    <a routerLink="/requests/new" class="waves-effect waves-light btn">Upload a Request</a>
+  </div>
 
-<div class="row">
-  <div *ngFor="let index of request" class="col s4 center-align">
-    <div class="card blue-grey darken-1">
-      <div class="card-content white-text">
-        <span class="card-title">{{index.title}}</span>
-        <p>{{index.description}}</p>
-      </div>
-      <div class="card-action">
-        <a href="#">This is a link</a>
+  <div class="row">
+    <div *ngFor="let index of request" class="col s4 center-align">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">{{index.title}}</span>
+          <p>{{index.description}}</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col s4 center-align">
-    <div class="card blue-grey darken-1">
-      <div class="card-content white-text">
-        <span class="card-title">Title</span>
-        <p>I am a very simple card. I am good at containing small bits of information.
-        I am convenient because I require little markup to use effectively.</p>
-      </div>
-      <div class="card-action">
-        <a href="#">This is a link</a>
+    <div class="col s4 center-align">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Title</span>
+          <p>I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively.</p>
+          </div>
+          <div class="card-action">
+            <a href="#">This is a link</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
 </div>

@@ -1,47 +1,33 @@
-<div class="row" id="controller">
-  <div class="col s6 center-align">
-    <a [routerLink]="['/plates/new']" class="waves-effect waves-light btn">New Event</a>
-  </div>
-  <div class="col s6 center-align">
-    <a *ngIf="plate"[routerLink]="['/requests/'+ plate[0].location]" class="waves-effect waves-light btn">List Request</a>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col s12 m3">
-    <div class="card">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="http://biotrendies.com/wp-content/uploads/2015/06/patata.jpg">
-      </div>
-
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-        <p><a href="#">This is a link</a></p>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-      </div>
+<div class="image-background">
+  <div class="row center-align" >
+  <br>
+  <h1 *ngIf="plate" >Next Events in {{plate[0].location}}</h1>
+    <div class="col s6 m6 center-align">
+      <a [routerLink]="['/plates/new']" class="waves-effect waves-light btn">New Event</a>
+    </div>
+    <div class="col s6 m6 center-align">
+      <a *ngIf="plate"[routerLink]="['/requests/'+ plate[0].location]" class="waves-effect waves-light btn">List Request</a>
     </div>
   </div>
 
+  <div class="row">
 
-
-
-  <div *ngFor="let index of plate" class="col s12 m3">
-    <div class="card product-row">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator"  [src]="'http://localhost:3000/' + index.pic_path">
-      </div>
-      <div class="card-content">
-        <span class="card-title grey-text text-darken-4"> {{index.name}}<i class="material-icons right">more_vert</i></span>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">{{index.name}}<i class="material-icons right">close</i></span>
-        <p>{{index.description}}</p>
-        <p><a routerLink="/plates/show/{{index._id}}">View Details</a></p>
+    <div *ngFor="let index of plate" class="col s12 m3">
+      <div class="card product-row">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" id="pic" [src]="'http://localhost:3000/' + index.pic_path">
+        </div>
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4"> {{index.name}}<i class="material-icons right">more_vert</i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">{{index.name}}<i class="material-icons right">close</i></span>
+          <p>{{index.description}}</p>
+          <p><a routerLink="/plates/show/{{index._id}}">View Details</a></p>
+        </div>
       </div>
     </div>
+
   </div>
 
 </div>
